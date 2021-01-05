@@ -26,3 +26,7 @@ import "./modules/vector-maps";
 
 // Tables
 import "./modules/datatables"; // requires jQuery
+
+// HighlightJS for source code prettyfication
+var hljs = require("highlight.js");
+hljs.initHighlightingOnLoad();

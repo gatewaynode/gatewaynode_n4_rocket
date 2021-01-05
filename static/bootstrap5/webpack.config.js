@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const hljs = require("highlight.js");
 
 const opts = {
   rootDir: process.cwd(),

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="Gatewaynode a personal site" name="description"/>
+    <meta content="Gatewaynode" name="author"/>
+    <title>GatewayNode</title>
+    <link href="static/bootstrap5/dist/css/dark.css" rel="stylesheet"/>
+  </head>
+  <body data-layout="fluid" data-sidebar-behavior="sticky" data-sidebar-position="left" data-theme="default">
+    <div class="wrapper">
+      <nav class="sidebar" id="sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="/" title="Home">
+            <svg
+              enable-background="new 0 0 20 20"
+              height="20px"
+              version="1.1"
+              viewbox="0 0 20 20"
+              width="20px"
+              x="0px"
+              xml:space="preserve"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns="http://www.w3.org/2000/svg"
+              y="0px">
+              <path d="M19.4,4.1l-9-4C10.1,0,9.9,0,9.6,0.1l-9,4C0.2,4.2,0,4.6,0,5s0.2,0.8,0.6,0.9l9,4C9.7,10,9.9,10,10,10s0.3,0,0.4-0.1l9-4 C19.8,5.8,20,5.4,20,5S19.8,4.2,19.4,4.1z"/>
+              <path d="M10,15c-0.1,0-0.3,0-0.4-0.1l-9-4c-0.5-0.2-0.7-0.8-0.5-1.3c0.2-0.5,0.8-0.7,1.3-0.5l8.6,3.8l8.6-3.8c0.5-0.2,1.1,0,1.3,0.5 c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,15,10.1,15,10,15z"/>
+              <path d="M10,20c-0.1,0-0.3,0-0.4-0.1l-9-4c-0.5-0.2-0.7-0.8-0.5-1.3c0.2-0.5,0.8-0.7,1.3-0.5l8.6,3.8l8.6-3.8c0.5-0.2,1.1,0,1.3,0.5 c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,20,10.1,20,10,20z"/>
+            </svg>
+            <span class="align-middle me-3">GatewayNode</span>
+          </a>
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">
+              Nodes
+            </li>
+            {% for key, value in main_menu %}
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link collapsed" href="{{ value.relative_path }}">
+                  {# data-bs-target="#dashboards" data-bs-toggle="collapse"> #}
+                  <i class="align-middle" data-feather="disc"></i>
+                  <span class="align-middle">{{ key }}</span>
+                  <span class="badge badge-sidebar-primary">{{ value.number_of_files }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </nav>
+      <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle">
+            <i class="hamburger align-self-center"></i>
+          </a>
+          <form class="d-none d-sm-inline-block">
+            <div class="input-group input-group-navbar">
+              <input aria-label="Search" class="form-control" placeholder="Search projects…" type="text"/>
+              <button class="btn" type="button">
+                <i class="align-middle" data-feather="search"></i>
+              </button>
+            </div>
+          </form>
+          <ul class="navbar-nav">
+            <li class="nav-item px-2 dropdown">
+              <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="servicesDropdown" role="button">
+                Mega menu
+              </a>
+              <div aria-labelledby="servicesDropdown" class="dropdown-menu dropdown-menu-start dropdown-mega">
+                <div class="d-md-flex align-items-start justify-content-start">
+                  <div class="dropdown-mega-list">
+                    <div class="dropdown-header">UI Elements</div>
+                    <a class="dropdown-item" href="#">Alerts</a>
+                    <a class="dropdown-item" href="#">Buttons</a>
+                    <a class="dropdown-item" href="#">Cards</a>
+                    <a class="dropdown-item" href="#">Carousel</a>
+                    <a class="dropdown-item" href="#">General</a>
+                    <a class="dropdown-item" href="#">Grid</a>
+                    <a class="dropdown-item" href="#">Modals</a>
+                    <a class="dropdown-item" href="#">Tabs</a>
+                    <a class="dropdown-item" href="#">Typography</a>
+                  </div>
+                  <div class="dropdown-mega-list">
+                    <div class="dropdown-header">Forms</div>
+                    <a class="dropdown-item" href="#">Layouts</a>
+                    <a class="dropdown-item" href="#">Basic Inputs</a>
+                    <a class="dropdown-item" href="#">Input Groups</a>
+                    <a class="dropdown-item" href="#">Advanced Inputs</a>
+                    <a class="dropdown-item" href="#">Editors</a>
+                    <a class="dropdown-item" href="#">Validation</a>
+                    <a class="dropdown-item" href="#">Wizard</a>
+                  </div>
+                  <div class="dropdown-mega-list">
+                    <div class="dropdown-header">Tables</div>
+                    <a class="dropdown-item" href="#">Basic Tables</a>
+                    <a class="dropdown-item" href="#">Responsive Table</a>
+                    <a class="dropdown-item" href="#">Table with Buttons</a>
+                    <a class="dropdown-item" href="#">Column Search</a>
+                    <a class="dropdown-item" href="#">Muulti Selection</a>
+                    <a class="dropdown-item" href="#">Ajax Sourced Data</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle" data-bs-toggle="dropdown" href="#" id="messagesDropdown">
+                  <div class="position-relative">
+                    <i class="align-middle" data-feather="message-circle"></i>
+                    <span class="indicator">4</span>
+                  </div>
+                </a>
+                <div aria-labelledby="messagesDropdown" class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0">
+                  <div class="dropdown-menu-header">
+                    <div class="position-relative">
+                      4 New Messages
+                    </div>
+                  </div>
+                  <div class="list-group">
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <img alt="Ashley Briggs" class="avatar img-fluid rounded-circle" src="img/avatars/avatar-5.jpg"/>
+                        </div>
+                        <div class="col-10 ps-2">
+                          <div class="text-dark">Ashley Briggs</div>
+                          <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
+                          <div class="text-muted small mt-1">15m ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <img alt="Carl Jenkins" class="avatar img-fluid rounded-circle" src="img/avatars/avatar-2.jpg"/>
+                        </div>
+                        <div class="col-10 ps-2">
+                          <div class="text-dark">Carl Jenkins</div>
+                          <div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
+                          <div class="text-muted small mt-1">2h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <img alt="Stacie Hall" class="avatar img-fluid rounded-circle" src="img/avatars/avatar-4.jpg"/>
+                        </div>
+                        <div class="col-10 ps-2">
+                          <div class="text-dark">Stacie Hall</div>
+                          <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
+                          <div class="text-muted small mt-1">4h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <img alt="Bertha Martin" class="avatar img-fluid rounded-circle" src="img/avatars/avatar-3.jpg"/>
+                        </div>
+                        <div class="col-10 ps-2">
+                          <div class="text-dark">Bertha Martin</div>
+                          <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
+                          <div class="text-muted small mt-1">5h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="dropdown-menu-footer">
+                    <a class="text-muted" href="#">Show all messages</a>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle" data-bs-toggle="dropdown" href="#" id="alertsDropdown">
+                  <div class="position-relative">
+                    <i class="align-middle" data-feather="bell-off"></i>
+                  </div>
+                </a>
+                <div aria-labelledby="alertsDropdown" class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0">
+                  <div class="dropdown-menu-header">
+                    4 New Notifications
+                  </div>
+                  <div class="list-group">
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <i class="text-danger" data-feather="alert-circle"></i>
+                        </div>
+                        <div class="col-10">
+                          <div class="text-dark">Update completed</div>
+                          <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
+                          <div class="text-muted small mt-1">2h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <i class="text-warning" data-feather="bell"></i>
+                        </div>
+                        <div class="col-10">
+                          <div class="text-dark">Lorem ipsum</div>
+                          <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
+                          <div class="text-muted small mt-1">6h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <i class="text-primary" data-feather="home"></i>
+                        </div>
+                        <div class="col-10">
+                          <div class="text-dark">Login from 192.186.1.1</div>
+                          <div class="text-muted small mt-1">8h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="list-group-item" href="#">
+                      <div class="row g-0 align-items-center">
+                        <div class="col-2">
+                          <i class="text-success" data-feather="user-plus"></i>
+                        </div>
+                        <div class="col-10">
+                          <div class="text-dark">New connection</div>
+                          <div class="text-muted small mt-1">Anna accepted your request.</div>
+                          <div class="text-muted small mt-1">12h ago</div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="dropdown-menu-footer">
+                    <a class="text-muted" href="#">Show all notifications</a>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-flag dropdown-toggle" data-bs-toggle="dropdown" href="#" id="languageDropdown">
+                  <img alt="English" src="img/flags/us.png"/>
+                </a>
+                <div aria-labelledby="languageDropdown" class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="#">
+                    <img alt="English" class="align-middle me-1" src="img/flags/us.png" width="20"/>
+                    <span class="align-middle">English</span>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <img alt="Spanish" class="align-middle me-1" src="img/flags/es.png" width="20"/>
+                    <span class="align-middle">Spanish</span>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <img alt="German" class="align-middle me-1" src="img/flags/de.png" width="20"/>
+                    <span class="align-middle">German</span>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <img alt="Dutch" class="align-middle me-1" src="img/flags/nl.png" width="20"/>
+                    <span class="align-middle">Dutch</span>
+                  </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" data-bs-toggle="dropdown" href="#">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
+                <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown" href="#">
+                  <img alt="Chris Wood" class="avatar img-fluid rounded-circle me-1" src="img/avatars/avatar.jpg"/>
+                  <span class="text-dark">Chris Wood</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="pages-profile.html">
+                    <i class="align-middle me-1" data-feather="user"></i>
+                    Profile</a>
+                  <a class="dropdown-item" href="#">
+                    <i class="align-middle me-1" data-feather="pie-chart"></i>
+                    Analytics</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
+                  <a class="dropdown-item" href="#">Help</a>
+                  <a class="dropdown-item" href="#">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <main class="content">
+        <div class="container-fluid p-0">
+          <h1 class="h3 mb-3">{{ content.title }}</h1>
+          <small alt="Creation time">{{ content.created }}<small>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="card-title mb-0">{{ content.body }}</h5>
+                    </div>
+                    <div class="card-body"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+        {{ __tera_context }}
+        <script src="static/bootstrap5/dist/js/app.js"></script>
+      </body>
+    </html>
+    { "content": { "body": "Nothing yet", "created": "1970-01-01T00:00:00", "title": "Nothing yet" }, "main_menu": { "blog": { "children": {}, "relative_path": "/blog" }, "fiction": {
+    "children": {}, "relative_path": "/fiction" }, "politics": { "children": {}, "relative_path": "/politics" } } }
+  </body>
+</html>
