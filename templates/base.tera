@@ -9,28 +9,12 @@
     <title>GatewayNode</title>
     <link href="/static/bootstrap5/dist/css/dark.css" rel="stylesheet"/>
   </head>
-  <!-- HOW TO USE: data-theme: default (default), dark, light data-layout: fluid (default), boxed data-sidebar-position: left (default), right data-sidebar-behavior: sticky
-  (default), fixed, compact -->
   <body data-layout="fluid" data-sidebar-behavior="sticky" data-sidebar-position="left" data-theme="default">
     <div class="wrapper">
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-content js-simplebar">
           <a class="sidebar-brand" href="/">
-            <svg
-              enable-background="new 0 0 20 20"
-              height="20px"
-              version="1.1"
-              viewbox="0 0 20 20"
-              width="20px"
-              x="0px"
-              xml:space="preserve"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              xmlns="http://www.w3.org/2000/svg"
-              y="0px">
-              <path d="M19.4,4.1l-9-4C10.1,0,9.9,0,9.6,0.1l-9,4C0.2,4.2,0,4.6,0,5s0.2,0.8,0.6,0.9l9,4C9.7,10,9.9,10,10,10s0.3,0,0.4-0.1l9-4 C19.8,5.8,20,5.4,20,5S19.8,4.2,19.4,4.1z"/>
-              <path d="M10,15c-0.1,0-0.3,0-0.4-0.1l-9-4c-0.5-0.2-0.7-0.8-0.5-1.3c0.2-0.5,0.8-0.7,1.3-0.5l8.6,3.8l8.6-3.8c0.5-0.2,1.1,0,1.3,0.5 c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,15,10.1,15,10,15z"/>
-              <path d="M10,20c-0.1,0-0.3,0-0.4-0.1l-9-4c-0.5-0.2-0.7-0.8-0.5-1.3c0.2-0.5,0.8-0.7,1.3-0.5l8.6,3.8l8.6-3.8c0.5-0.2,1.1,0,1.3,0.5 c0.2,0.5,0,1.1-0.5,1.3l-9,4C10.3,20,10.1,20,10,20z"/>
-            </svg>
+            <img src="/static/images/nodes.svg" height=50px, width=50px>
             <span class="align-middle me-3">GatewayNode</span>
           </a>
           <ul class="sidebar-nav">
@@ -42,7 +26,11 @@
                 <a
                   class="sidebar-link collapsed" href="{{ value.relative_path }}">
                   {# data-bs-target="#dashboards" data-bs-toggle="collapse"> #}
-                  <i class="align-middle" data-feather="disc"></i>
+                  {# <i class="align-middle" data-feather="disc"></i> #}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-disc align-middle">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
                   <span class="align-middle">{{ key | title }}</span>
                   <span class="badge badge-sidebar-primary">{{ value.number_of_files }}</span>
                 </a>
@@ -53,12 +41,15 @@
       </ul>
       <div class="sidebar-cta">
         <div class="sidebar-cta-content">
-          <strong class="d-inline-block mb-2">What is this for?</strong>
+          <strong class="d-inline-block mb-2">Alternatives</strong>
           <div class="mb-3 text-sm">
-            Something goes here.
+            Get a copy of the site content or code (licensed).
+            <!-- If you are reading this then you should understand this is probably future state. But feel free to check out my repos. -->
           </div>
           <div class="d-grid">
-            <a class="btn btn-primary" href="/" target="_blank">Download</a>
+            <a class="btn btn-github" href="https://github.com/gatewaynode?tab=repositories" target="_blank">
+            <i class="align-left fab fa-github"></i>
+            Download</a>
           </div>
         </div>
       </div>
@@ -83,16 +74,13 @@
         <div class="col-6 text-start">
           <ul class="list-inline">
             <li class="list-inline-item">
-              <a class="text-muted" href="#">Support</a>
+              <a class="text-muted" href="/Privacy Disclosure">Privacy</a>
             </li>
             <li class="list-inline-item">
-              <a class="text-muted" href="#">Help Center</a>
+              <a class="text-muted" href="/Powered By">Powered By</a>
             </li>
             <li class="list-inline-item">
-              <a class="text-muted" href="#">Privacy</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted" href="#">Terms of Service</a>
+              <a class="text-muted" href="#">Contact</a>
             </li>
           </ul>
         </div>
@@ -105,7 +93,36 @@
       </div>
     </div>
   </footer>
-</div></div><script src="/static/bootstrap5/dist/js/app.js"></script>
-  {# {{ __tera_context }} #}
-  <script>hljs.initHighlightingOnLoad();</script>
-</body></html>
+</div>
+</div>
+<script src="/static/bootstrap5/dist/js/app.js"></script>
+   
+    <!-- Debugging Block -->
+    <p style="
+      background-color: crimson;
+      font-weight: 900;
+    ">Debugging Tera Context</p>
+    <pre>
+      <code>
+{{ __tera_context }}
+      </code>
+    </pre> 
+    <script src="/static/bootstrap5/dist/js/code.js"></script>
+    <!-- End Debugging Block -->
+{# 
+  <!-- Styling Helper -->
+  <div style="display: inline;">
+    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
+    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
+    <div style="height=100px; width=100px; background-color=#040004;"></div>
+    <div style="height=100px; width=100px; background-color=#C8FF00;"></div>
+    <div style="height=100px; width=100px; background-color=#FA023C;"></div>
+    <div style="height=100px; width=100px; background-color=#4B000F;"></div>
+    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
+    <div style="height=100px; width=100px; background-color=#040004;"></div>
+    <div style="height=100px; width=100px; background-color=#C8FF00;"></div>
+  </div>
+  <!-- End Styling Helper --> #}
+
+</body>
+</html>

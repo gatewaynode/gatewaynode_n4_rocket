@@ -5,23 +5,23 @@
       <div class="col-12 col-lg-12">
         <div class="card">
           <div class="card-body h-100">
-            <div class="d-flex align-items-start">
-              <img alt="Ashley Briggs" class="rounded-circle me-3" height="56" src="/static/images/cyber-square-small.png" width="56"/>
+          {# Sticky a top post #}
+            <div class="d-flex align-items-start sticky">
+              <img alt="Cyber generic graphic" class="rounded-circle me-3" height="56" src="/static/images/cyber-square-small.png" width="56"/>
               <div class="flex-grow-1">
                 <small class="float-end">{{ content.created }}</small>
                 <p class="mb-2">
-                  <strong>{{ content.title }}</strong>
+                  <h3>{{ content.title }}</h3>
                 </p>
                 <p>
                   {{ content.body }}
                 </p>
                 
-                <small class="text-muted">Today 7:51 pm</small><br/>
-                <a class="btn btn-sm btn-danger mt-1" href="#">
-                  <i class="feather-sm" data-feather="cpu"></i>
-                  Something</a>
+                <small class="text-muted">{{ content.body | wordcount }} words</small><br/>
+                <a class="btn btn-sm btn-secondary mt-1" href="{{ content.path }}">
+                  <i class="fas fa-globe-americas"></i>
+                  Comment or Rate</a>
               </div>
-              <!-- End Social Body -->
             </div>
             <!-- End Social Items -->
             <hr/>
@@ -32,12 +32,4 @@
       </div>
     </div>
     <!-- </div> Extra? -->
-    <div>
-    <!-- Debugging -->
-    <strong>DEBUG</strong>
-    <pre><code>
-    {{ __tera_context }}
-    </code></pre>
-    <!-- End Debugging -->
-    </div>
 {% endblock  content %}

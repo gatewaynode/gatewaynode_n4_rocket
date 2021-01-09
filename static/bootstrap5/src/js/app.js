@@ -8,25 +8,25 @@ import "./modules/sidebar";
 import "./modules/notyf";
 
 // Charts
-import "./modules/chartjs";
-import "./modules/apexcharts";
+//import "./modules/chartjs";
+//import "./modules/apexcharts";
 
 // Forms
-import "./modules/daterangepicker"; // requires jQuery
-import "./modules/datetimepicker"; // requires jQuery
+//import "./modules/daterangepicker"; // requires jQuery
+//import "./modules/datetimepicker"; // requires jQuery
 import "./modules/fullcalendar";
 import "./modules/mask"; // requires jQuery
 import "./modules/quill";
-import "./modules/select2"; // requires jQuery
-import "./modules/validation"; // requires jQuery
-import "./modules/wizard"; // requires jQuery
+//import "./modules/select2"; // requires jQuery
+//import "./modules/validation"; // requires jQuery
+//import "./modules/wizard"; // requires jQuery
 
 // Maps
-import "./modules/vector-maps";
+//import "./modules/vector-maps";
 
 // Tables
-import "./modules/datatables"; // requires jQuery
+//import "./modules/datatables"; // requires jQuery
 
 // HighlightJS for source code prettyfication
-var hljs = require("highlight.js");
-hljs.initHighlightingOnLoad();
+//var hljs = require("highlight.js");
+//hljs.initHighlightingOnLoad();

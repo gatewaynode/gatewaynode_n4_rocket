@@ -10,8 +10,12 @@
                       <h5 class="card-title mb-0">{{ content.body }}</h5>
                     </div>
                     <div class="card-body"></div>
+                    <script defer src="https://cdn.commento.io/js/commento.js"></script>
+                    <div id="commento"></div>
                   </div>
                 </div>
               </div>
             </div>
+          {# Cause we are going to be posting a lot of code right? #}
+          <script src="/static/bootstrap5/dist/js/code.js"></script>
 {% endblock content %}
