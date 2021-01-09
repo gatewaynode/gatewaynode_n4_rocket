@@ -11,19 +11,6 @@
 */
 
 /*!
- * ApexCharts v3.22.2
- * (c) 2018-2020 Juned Chhipa
- * Released under the MIT License.
- */
-
-/*!
- * Chart.js v2.9.4
- * https://www.chartjs.org
- * (c) 2020 Chart.js Contributors
- * Released under the MIT License
- */
-
-/*!
  * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
@@ -46,15 +33,6 @@
  * https://jquery.org/license
  *
  * Date: 2020-05-04T22:49Z
- */
-
-/*!
- * jQuery Validation Plugin v1.19.2
- *
- * https://jqueryvalidation.org/
- *
- * Copyright (c) 2020 Jörn Zaefferer
- * Released under the MIT license
  */
 
 /*! *****************************************************************************
@@ -228,8 +206,6 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! /home/travis/build/feathericons/feather/src/index.js */
 
-/*! Select2 4.0.13 | https://github.com/select2/select2/blob/master/LICENSE.md */
-
 /*! classnames/dedupe */
 
 /*! core-js/es/array/from */
@@ -241,14 +217,6 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! exports provided: xmlns, width, height, viewBox, fill, stroke, stroke-width, stroke-linecap, stroke-linejoin, default */
 
 /*! no static exports found */
-
-/*! svg.draggable.js - v2.2.2 - 2019-01-08
-* https://github.com/svgdotjs/svg.draggable.js
-* Copyright (c) 2019 Wout Fierens; Licensed MIT */
-
-/*! svg.filter.js - v2.0.2 - 2016-02-24
-* https://github.com/wout/svg.filter.js
-* Copyright (c) 2016 Wout Fierens; Licensed MIT */
 
 /*!*********************!*\
   !*** ./src/icon.js ***!
@@ -573,19 +541,5 @@ PERFORMANCE OF THIS SOFTWARE.
 /*!*******************************************************************************!*\
   !*** ./node_modules/core-js/internals/validate-set-prototype-of-arguments.js ***!
   \*******************************************************************************/
-
-/**
-* @version: 3.1
-* @author: Dan Grossman http://www.dangrossman.info/
-* @copyright: Copyright (c) 2012-2019 Dan Grossman. All rights reserved.
-* @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
-* @website: http://www.daterangepicker.com/
-*/
-
-/*@preserve
- * Tempus Dominus Bootstrap4 v5.1.2 (https://tempusdominus.github.io/bootstrap-4/)
- * Copyright 2016-2018 Jonathan Peterson
- * Licensed under MIT (https://github.com/tempusdominus/bootstrap-3/blob/master/LICENSE)
- */
 
 //! moment.js

@@ -3,10 +3,11 @@
 extern crate rocket_contrib;
 
 use std::collections::HashMap;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use n4;
 use n4::{MDContent, MenuItem};
+use rocket::response::Redirect;
 use rocket::State;
 use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
@@ -18,7 +19,7 @@ extern crate rocket;
 extern crate serde_derive;
 
 #[derive(Serialize, Deserialize, Debug)]
-struct Basic {
+struct BasicPage {
     main_menu: HashMap<String, MenuItem>,
     content: MDContent,
 }
@@ -35,14 +36,15 @@ fn main() {
     rocket::ignite()
         .manage(menus)
         .attach(Template::fairing())
+        .mount("/", routes![sitemap, robots, index, articles])
         .mount(
             "/static",
             StaticFiles::from(concat!(env!("CARGO_MANIFEST_DIR"), "/static")).rank(2),
         )
-        .mount("/", routes![sitemap, robots, index, articles])
         .launch();
 }
 
+// <-- Helper Routes "first"
 #[get("/sitemap.xml")]
 fn sitemap() -> Template {
     let mut context = HashMap::new();
@@ -61,24 +63,36 @@ Sitemap: https://gatewaynode.com/sitemap.xml",
     )
 }
 
+#[get("/favicon.ico")]
+fn favicon() -> Redirect {
+    Redirect::permanent("/static/images/favicon.ico")
+}
+// --> End helpers
+
+/// Front Page Route
 #[get("/")]
 fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
-    let mut content = MDContent::default();
-    let context = Basic {
+    let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
+    let full_content = n4::read_single_page(Path::new(&format!(
+        "{}/{}",
+        md_files_path, "Introduction.md"
+    )));
+    let context = BasicPage {
         main_menu: menus.clone(),
-        content: content,
+        content: full_content.markdown,
     };
 
     Template::render("index", context)
 }
 
+/// Everything Else Route
 #[get("/<article..>", rank = 5)]
 fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Template {
     let mut content = MDContent::default();
 
     let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website";
     // If Markdown file exists
-    if std::path::Path::new(&format!(
+    if Path::new(&format!(
         "{}/{}{}",
         md_files_path,
         article.to_string_lossy(),
@@ -86,13 +100,20 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
     ))
     .exists()
     {
-        content.title = String::from("File exists");
-        content.body = format!("This is the file router: exists() = {:#?}", article);
+        let full_content = n4::read_single_page(Path::new(&format!(
+            "{}/{}{}",
+            md_files_path,
+            article.to_string_lossy(),
+            ".md"
+        )));
+        let context = BasicPage {
+            main_menu: menus.clone(),
+            content: full_content.markdown,
+        };
+        return Template::render("article", context);
     }
     // If Directory exists
-    else if std::path::Path::new(&format!("{}/{}", md_files_path, article.to_string_lossy()))
-        .is_dir()
-    {
+    else if Path::new(&format!("{}/{}", md_files_path, article.to_string_lossy())).is_dir() {
         let content = n4::read_full_dir_sorted(
             format!("{}/{}", md_files_path, article.to_string_lossy()).as_str(),
         );
@@ -108,7 +129,7 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
         content.body = format!("This is the file router fail: {:#?}", article); // TODO send to 404 function
     }
 
-    let context = Basic {
+    let context = BasicPage {
         main_menu: menus.clone(),
         content: content,
     };

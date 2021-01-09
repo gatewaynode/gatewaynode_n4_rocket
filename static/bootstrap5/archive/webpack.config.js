@@ -7,7 +7,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const hljs = require("highlight.js");
 
 const opts = {
   rootDir: process.cwd(),
@@ -17,7 +16,6 @@ const opts = {
 module.exports = {
   entry: {
     app: "./src/js/app.js",
-    code: "./src/js/code.js",
     settings: "./src/js/settings/index.js",
     light: "./src/scss/light.scss",
     dark: "./src/scss/dark.scss",
