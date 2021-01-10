@@ -13,7 +13,7 @@
     <div class="wrapper">
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-content js-simplebar">
-          <a class="sidebar-brand" href="/">
+          <a class="sidebar-brand" href="/" title="Home">
             <img src="/static/images/nodes.svg" height=50px, width=50px>
             <span class="align-middle me-3">GatewayNode</span>
           </a>
@@ -25,14 +25,9 @@
               <li class="sidebar-item">
                 <a
                   class="sidebar-link collapsed" href="{{ value.relative_path }}">
-                  {# data-bs-target="#dashboards" data-bs-toggle="collapse"> #}
-                  {# <i class="align-middle" data-feather="disc"></i> #}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-disc align-middle">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span class="align-middle">{{ key | title }}</span>
-                  <span class="badge badge-sidebar-primary">{{ value.number_of_files }}</span>
+                  <img src="{{ value.menu_meta.menu_icon }}" class="align-middle menu-icon" title="{{ value.menu_meta.description }}">
+                  <span class="align-middle" title="{{ value.menu_meta.description }}">{{ key | title }}</span>
+                  <span class="badge badge-sidebar-primary" title="Number of items">{{ value.number_of_files }}</span>
                 </a>
               </li>
             {% endfor %}
@@ -87,7 +82,7 @@
         <div class="col-6 text-end">
           <p class="mb-0">
             &copy; 2021 -
-            <a class="text-muted" href="index.html">GatewayNode</a>
+            <a class="text-muted" href="/">GatewayNode</a>
           </p>
         </div>
       </div>
@@ -96,7 +91,7 @@
 </div>
 </div>
 <script src="/static/bootstrap5/dist/js/app.js"></script>
-   
+{#    
     <!-- Debugging Block -->
     <p style="
       background-color: crimson;
@@ -109,20 +104,6 @@
     </pre> 
     <script src="/static/bootstrap5/dist/js/code.js"></script>
     <!-- End Debugging Block -->
-{# 
-  <!-- Styling Helper -->
-  <div style="display: inline;">
-    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
-    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
-    <div style="height=100px; width=100px; background-color=#040004;"></div>
-    <div style="height=100px; width=100px; background-color=#C8FF00;"></div>
-    <div style="height=100px; width=100px; background-color=#FA023C;"></div>
-    <div style="height=100px; width=100px; background-color=#4B000F;"></div>
-    <div style="height=100px; width=100px; background-color=#413D3D;"></div>
-    <div style="height=100px; width=100px; background-color=#040004;"></div>
-    <div style="height=100px; width=100px; background-color=#C8FF00;"></div>
-  </div>
-  <!-- End Styling Helper --> #}
-
+     #}
 </body>
 </html>
