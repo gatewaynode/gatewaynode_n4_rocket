@@ -1,15 +1,19 @@
 {% extends "base" %}
 {% block content %}
         <div class="container-fluid p-0">
-          <h1 class="h3 mb-3">{{ content.title }}</h1>
-          <small alt="Creation time">{{ content.created }}</small>
+          <a href={{ content.path | replace(from=content.title, to="") }}>
+            <h2 class="h2 mb-3"><img src="{{ content.meta.content_icon }}" class="icons">{{ content.path | replace(from=content.title, to="") }}</h2> {# TODO Section Meta header goes here #}
+          </a>
+          
               <div class="row">
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h5 class="card-title mb-0">{{ content.body }}</h5>
+                    {# What is the class .card-title even useful for? #}
+                      <h3 class=" mb-0">{{ content.title }}</h3>
+                      <small class="timestamp" alt="Creation time">{{ content.created }}</small>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">{{ content.body }}</div>
                     <script defer src="https://cdn.commento.io/js/commento.js"></script>
                     <div id="commento"></div>
                   </div>

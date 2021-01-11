@@ -18,8 +18,9 @@
                 </p>
                 
                 <small class="text-muted">{{ content.body | wordcount }} words</small><br/>
-                <a class="btn btn-sm btn-secondary mt-1" href="{{ content.path }}">
-                  <i class="fas fa-globe-americas"></i>
+                <a class="btn btn-sm btn-secondary mt-1" href="{{ content.path }}#commento" title="Add comments or ratings to content.">
+                  {# <i class="fas fa-globe-americas"></i> #}
+                  <img src="/static/images/globe.svg" class="icons">
                   Comment or Rate</a>
               </div>
             </div>
