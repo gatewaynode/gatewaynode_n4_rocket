@@ -67,6 +67,7 @@ $teal: 			#20c997 !default;
 $cyan: 			#1F9BCF !default;
 
 $white:    #fff !default;
+$alt-white: #c5ccce !default;
 $gray-100: #f4f7f9 !default;
 $gray-200: #e2e8ee !default;
 $gray-300: #dee6ed !default;
@@ -135,7 +136,8 @@ $static-dark: #293042 !default;
 
 // Body
 $body-bg: #F7F9FC !default;
-$body-color: $gray-600 !default;
+// $body-color:$gray-600 !default;
+$body-color: $alt-white !default;
 
 // Links
 $link-decoration: none !default;
@@ -156,7 +158,8 @@ $h3-font-size: $font-size-base * 1.5 !default;
 $h4-font-size: $font-size-base * 1.25 !default;
 $h5-font-size: $font-size-base !default;
 $h6-font-size: $font-size-base !default;
-$headings-color: $gray-700 !default;
+// $headings-color: $gray-700 !default;
+$headings-color: #c5ccce; // Light Grey alternative
 
 // Text
 $text-muted: lighten($gray-600, 3);
@@ -259,9 +262,12 @@ $table-striped-bg: $gray-100 !default;
 $sidebar-width: 260px !default;
 $sidebar-transition: margin-left .35s ease-in-out, left .35s ease-in-out, margin-right .35s ease-in-out, right .35s ease-in-out !default;
 $sidebar-bg: (
-  "default": #293042,
-  "colored": #2d6bcf,
-  "dark": #293042,
+  //"default": #293042, // Old
+  "default": #131724, // This is the sidebar background
+  "colored": #0b2d64,
+  // "colored": #2d6bcf,
+  "dark": #121b31,
+  //"dark": #293042,
   "light": $static-white
 ) !default;
   

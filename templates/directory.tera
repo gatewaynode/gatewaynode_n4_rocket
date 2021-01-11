@@ -1,6 +1,9 @@
 {% extends "base" %}
 {% block content %}
         <div class="container-fluid p-0">
+          <a href="/{{ current_path }}">
+            <h2 class="h2 mb-3"><img src={{ main_menu[current_path].menu_meta.menu_icon }} class="icons">{{ current_path }}</h2>
+          </a>
           <table class="table table-striped my-0" id="datatables-dashboard-products">
             <thead>
               <tr>

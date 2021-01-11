@@ -1,11 +1,13 @@
 // Dark theme
-$dark-theme-base: #293042 !default;
+$dark-theme-base: #131824 !default;
+// $dark-theme-base: #293042 !default; //Old
 
 // Body
 $body-bg: darken($dark-theme-base, 4.5%) !default;
 
 // Theme colors
-$blue: 			#3F80EA !default;
+//$blue: 			#3F80EA !default;
+$blue: 			#3b3e42 !default;
 $yellow: 		#CC8B37 !default;
 
 $white:    $dark-theme-base !default;
@@ -73,3 +75,58 @@ $jsvectormap-zoom-btn: $gray-400 !default;
 
 // Select2
 $s2bs-input-single-color: #fff;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// Darker fixes and other customizations
+///////////////////////////////////////////////////////////////////////////////////////////
+
+.main .card p a,
+tbody tr td a {
+  color:$yellow;
+}
+
+.main .card p a:hover,
+tbody tr td a:hover {
+  color:darken($yellow, 20%);
+}
+
+// .main .card p a {
+//   color:lighten($yellow, 30%);
+// }
+// .main .card p a:hover {
+//   color:$yellow;
+// }
+
+// Layout improvements after darker fixes
+table {
+  margin-bottom: 5em;
+}
+
+// Since I'm not going to injext icons with Javascript we neec some theme help
+%icon {
+  height: 1em;
+  width: 1em;
+}
+
+.icons {
+  @extend %icon;
+}
+
+.sidebar-nav .icons {
+  @extend %icon;
+  margin-right: 0.5em;
+}
+
+.sidebar-nav h3 {
+  padding: .625rem 1.625rem;
+}
+
+.btn img.icons{
+  margin-bottom: 0.25em;
+}
+
+h1 .icons, h2 .icons, h3 .icons, h4 .icons, h5 .icons {
+  @extend %icon;
+  margin-right: 1em;
+  margin-bottom: 0.3em;
+}

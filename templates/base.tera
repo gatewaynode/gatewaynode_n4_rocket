@@ -18,14 +18,15 @@
             <span class="align-middle me-3">GatewayNode</span>
           </a>
           <ul class="sidebar-nav">
-            <li class="sidebar-header">
+            <h3>Nodes</h3>
+            {# <li class="sidebar-header">
               Nodes
-            </li>
+            </li> #}
             {% for key, value in main_menu %}
               <li class="sidebar-item">
                 <a
                   class="sidebar-link collapsed" href="{{ value.relative_path }}">
-                  <img src="{{ value.menu_meta.menu_icon }}" class="align-middle menu-icon" title="{{ value.menu_meta.description }}">
+                  <img src="{{ value.menu_meta.menu_icon }}" class="align-middle icons" title="{{ value.menu_meta.description }}">
                   <span class="align-middle" title="{{ value.menu_meta.description }}">{{ key | title }}</span>
                   <span class="badge badge-sidebar-primary" title="Number of items">{{ value.number_of_files }}</span>
                 </a>
@@ -91,7 +92,7 @@
 </div>
 </div>
 <script src="/static/bootstrap5/dist/js/app.js"></script>
-{#    
+   
     <!-- Debugging Block -->
     <p style="
       background-color: crimson;
@@ -104,6 +105,6 @@
     </pre> 
     <script src="/static/bootstrap5/dist/js/code.js"></script>
     <!-- End Debugging Block -->
-     #}
+    
 </body>
 </html>

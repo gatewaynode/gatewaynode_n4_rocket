@@ -28,6 +28,7 @@ struct BasicPage {
 struct ContentList {
     main_menu: HashMap<String, MenuItem>,
     content: Vec<n4::PageContent>,
+    current_path: String,
 }
 
 fn main() {
@@ -120,6 +121,7 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
         let context = ContentList {
             main_menu: menus.clone(),
             content: content,
+            current_path: article.to_string_lossy().to_string(),
         };
         return Template::render("directory", context);
     }
