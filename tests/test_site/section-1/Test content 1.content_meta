@@ -1,0 +1,8 @@
+{
+  "content_icon": "/static/images/rust-programming-language.svg",
+  "description": "This language is something special",
+  "timestamp_override": null,
+  "weight": 100,
+  "author": "Gatewaynode",
+  "license": "cc-by-sa"
+}

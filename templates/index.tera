@@ -7,30 +7,39 @@
           <div class="card-body h-100">
           {# Sticky a top post #}
             <div class="d-flex align-items-start sticky">
-              <img alt="Cyber generic graphic" class="rounded-circle me-3" height="56" src="/static/images/cyber-square-small.png" width="56"/>
-              <div class="flex-grow-1">
-                <small class="float-end">{{ content.created }}</small>
-                <p class="mb-2">
-                  <h3>{{ content.title }}</h3>
-                </p>
-                <p>
-                  {{ content.body }}
-                </p>
-                
-                <small class="text-muted">{{ content.body | wordcount }} words</small><br/>
-                <a class="btn btn-sm btn-secondary mt-1" href="{{ content.path }}#commento" title="Add comments or ratings to content.">
-                  {# <i class="fas fa-globe-americas"></i> #}
-                  <img src="/static/images/globe.svg" class="icons">
-                  Comment or Rate</a>
+              {# Make sure you have a column div to stay responsive #}
+              <div class="col-12">
+                <div class="flex-grow-1">
+                  <small class="float-end">{{ content.created }}</small>
+                    <h3><img class="me-3 icons" height="56" src="{{ content.meta.content_icon }}" width="56"/>{{ content.title }}</h3>
+                    {{ content.body }}
+                  <small class="text-muted">{{ content.body | wordcount }} words</small><br/>
+                  <a class="btn btn-sm btn-secondary mt-1" href="{{ content.path }}#commento" title="Add comments or ratings to content.">
+                    {# <i class="fas fa-globe-americas"></i> #}
+                    <img src="/static/images/globe.svg" class="icons">
+                    Comment or Rate</a>
+                </div>
               </div>
             </div>
-            <!-- End Social Items -->
-            <hr/>
+        </div> <!-- End Cards -->
+        <div class="card-body">
+          <div class="content-licensing">
+            <ul class="list-inline">
+              {{ licensing[content.meta.license] }}
+              <li class="list-inline-item">
+                <small>Author: {{ content.meta.author }} </small>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
           <div class="d-grid">
-            <a class="btn btn-primary" href="#">Load more</a>
+            <a class="btn btn-primary" href="/blog">Read more</a>
           </div>
         </div>
       </div>
     </div>
     <!-- </div> Extra? -->
+    <script src="/static/bootstrap5/dist/js/code.js"></script>
+
 {% endblock  content %}

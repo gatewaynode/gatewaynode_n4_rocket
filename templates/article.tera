@@ -14,8 +14,20 @@
                       <small class="timestamp" alt="Creation time">{{ content.created }}</small>
                     </div>
                     <div class="card-body">{{ content.body }}</div>
-                    <script defer src="https://cdn.commento.io/js/commento.js"></script>
-                    <div id="commento"></div>
+                    <div class="card-body">
+                      <div class="content-licensing">
+                        <ul class="list-inline">
+                          {{ licensing[content.meta.license] }}
+                          <li class="list-inline-item">
+                            <small>Author: {{ content.meta.author }} </small>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <script defer src="https://cdn.commento.io/js/commento.js"></script>
+                      <div id="commento"></div>
+                    </div>
                   </div>
                 </div>
               </div>

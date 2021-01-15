@@ -4,32 +4,38 @@
           <a href="/{{ current_path }}">
             <h2 class="h2 mb-3"><img src={{ main_menu[current_path].menu_meta.menu_icon }} class="icons">{{ current_path }}</h2>
           </a>
+
+          <div class="col-12">
+
           <table class="table table-striped my-0" id="datatables-dashboard-products">
             <thead>
               <tr>
                 <th>Title</th>
                 <th class="d-none d-xl-table-cell">Date</th>
+                <th class="d-none d-xl-table-cell">Description</th>
                 <th class="d-none d-xl-table-cell">Length</th>
-                <th class="d-none d-xl-table-cell">Comments</th>
-                <th>Link</th>
+                <th>Comment</th>
               </tr>
             </thead>
             <tbody>
               {# INSERT LOOP HERE #}
-              {% for item in content %}
+              {% for item in content | reverse %}
                 <tr>
                   <td>
                     <a href="{{ item.markdown.path }}">{{ item.markdown.title }}</a>
                   </td>
                   <td>{{ item.markdown.created }}</td>
+                  <td>{{ item.markdown.meta.description }}</td>
                   <td>{{ item.markdown.body | wordcount }}</td>
-                  <td>0</td>
                   <td>
-                    <a href="{{ item.markdown.path }}" target="_blank" title="Open in a new tab.">Read</a>
+                    <a href="{{ item.markdown.path }}#commento" title="Go directly to the comments.">Comments</a>
                   </td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
+
+          </div>
+
         </div>
 {% endblock content %}

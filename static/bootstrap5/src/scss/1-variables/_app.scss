@@ -1,8 +1,15 @@
+// Override various bold implementations, this is the one thing I don't like about this theme
+$alt-white: #c5ccce !default;
+body strong {
+  color: lighten($alt-white, 10%);
+}
+// End mods
+
 // Fonts
 $font-family-sans-serif: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
-$font-weight-bold: 500 !default;
+$font-weight-bold: 700 !default;
 $font-size-base: .825rem !default;
 $font-size-lg: .95rem !default;
 $font-size-sm: .75rem !default;
@@ -67,7 +74,6 @@ $teal: 			#20c997 !default;
 $cyan: 			#1F9BCF !default;
 
 $white:    #fff !default;
-$alt-white: #c5ccce !default;
 $gray-100: #f4f7f9 !default;
 $gray-200: #e2e8ee !default;
 $gray-300: #dee6ed !default;

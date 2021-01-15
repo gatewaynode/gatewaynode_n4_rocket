@@ -1,12 +1,10 @@
-<?xml encoding="utf-8" version="1.0"?>
-<urlset
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for entry in sitemap_list %}
     <url>
       <loc>{{ entry.location }}.html</loc>
       <lastmod>"{{ entry.lastmod | truncate(length=19, end='') }}-04:00"</lastmod>
+      <changefreq>monthly</changefreq>
       <priority>{{ entry.priority }}</priority>
     </url>
   {% endfor %}

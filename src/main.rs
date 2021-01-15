@@ -22,6 +22,7 @@ extern crate serde_derive;
 struct BasicPage {
     main_menu: HashMap<String, MenuItem>,
     content: MDContent,
+    licensing: HashMap<String, String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -29,6 +30,64 @@ struct ContentList {
     main_menu: HashMap<String, MenuItem>,
     content: Vec<n4::PageContent>,
     current_path: String,
+}
+
+fn cc_licensing() -> HashMap<String, String> {
+    let list_opener = "<li class=\"list-inline-item\"><a rel=\"license\" href=\"https://creativecommons.org/licenses/";
+    let scope_string = "/4.0/\" title=\"The content of this section (inside the 'main' tag), excepting the comments, is licensed under a Creative Commons ";
+    let middle_first = "4.0 International License(https://creativecommons.org/licenses/";
+    let middle_second = "/4.0/).  Content in comments (inside the 'commento' id) is subject to the commento.io licensing terms. All other content on the page is subject to US copyright as listed at the bottom of the page\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/";
+    let list_closer = "/4.0/80x15.png\" /></a></li>";
+    let mut licenses: HashMap<String, String> = HashMap::new();
+    licenses.insert(
+        String::from("cc-by"),
+        format!(
+            "{}by{}ShareAlike {}by{}by{}",
+            list_opener, middle_first, scope_string, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc-by-sa"),
+        format!(
+            "{}by-sa{}Attribution-ShareAlike {}by-sa{}by-sa{}",
+            list_opener, scope_string, middle_first, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc-by-nd"),
+        format!(
+            "{}by-nd{}Attribution-NoDerivatives {}by-nd{}by-nd{}",
+            list_opener, scope_string, middle_first, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc-by-nc"),
+        format!(
+            "{}by-nc{}Attribution-NonCommercial {}by-nc{}by-nc{}",
+            list_opener, scope_string, middle_first, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc-by-nc-sa"),
+        format!(
+            "{}by-nc-sa{}Attribution-NonCommercial-ShareAlike {}by-nc-sa{}by-nc-sa{}",
+            list_opener, scope_string, middle_first, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc-by-nc-nd"),
+        format!(
+            "{}by-nc-nd{}Attribution-NonCommercial-NoDerivatives {}by-nc-nd{}by-nc-nd{}",
+            list_opener, scope_string, middle_first, middle_second, list_closer
+        ),
+    );
+    licenses.insert(
+        String::from("cc"),
+        String::from(
+            "<li class=\"list-inline-item\"><a rel=\"license\" href=\"/LICENSE\" title=\"All rights reserved\"><img alt=\"Copyright Statement\" style=\"border-width:0\" height=\"15px\" src=\"/static/images/copyright.svg\"></a></li>"
+        )
+    );
+    licenses
 }
 
 fn main() {
@@ -76,11 +135,12 @@ fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
     let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
     let full_content = n4::read_single_page(Path::new(&format!(
         "{}/{}",
-        md_files_path, "Introduction.md"
+        md_files_path, "blog/Webpack build caching errors....md"
     )));
     let context = BasicPage {
         main_menu: menus.clone(),
         content: full_content.markdown,
+        licensing: cc_licensing(),
     };
 
     Template::render("index", context)
@@ -110,6 +170,7 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
         let context = BasicPage {
             main_menu: menus.clone(),
             content: full_content.markdown,
+            licensing: cc_licensing(),
         };
         return Template::render("article", context);
     }
@@ -134,6 +195,7 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
     let context = BasicPage {
         main_menu: menus.clone(),
         content: content,
+        licensing: cc_licensing(),
     };
     Template::render("article", context)
 }

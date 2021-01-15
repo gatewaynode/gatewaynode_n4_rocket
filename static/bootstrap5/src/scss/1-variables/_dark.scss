@@ -80,6 +80,17 @@ $s2bs-input-single-color: #fff;
 // Darker fixes and other customizations
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+// So I added this in _app.scss, might need to move here
+// 1-variables/_app.scss:70:$alt-white: #c5ccce !default;
+// 1-variables/_app.scss:140:$body-color: $alt-white !default;
+// 1-variables/_app.scss:11:$font-weight-bold: 700 !default;
+// Override various bold implementations, this is the one thing I don't like about this theme
+// $alt-white: #c5ccce !default;
+// body strong {
+//   color: lighten($alt-white, 30%);
+// }
+// // End mods
+
 .main .card p a,
 tbody tr td a {
   color:$yellow;
@@ -90,12 +101,6 @@ tbody tr td a:hover {
   color:darken($yellow, 20%);
 }
 
-// .main .card p a {
-//   color:lighten($yellow, 30%);
-// }
-// .main .card p a:hover {
-//   color:$yellow;
-// }
 
 // Layout improvements after darker fixes
 table {
@@ -130,3 +135,10 @@ h1 .icons, h2 .icons, h3 .icons, h4 .icons, h5 .icons {
   margin-right: 1em;
   margin-bottom: 0.3em;
 }
+
+// Somewhere else is generating a code rule, but I can't find it outside of Quil in /vendor
+body code {
+  color: #04c494;
+  background-color: #000000;
+}
+
