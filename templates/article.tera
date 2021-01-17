@@ -13,7 +13,8 @@
                       <h3 class=" mb-0">{{ content.title }}</h3>
                       <small class="timestamp" alt="Creation time">{{ content.created }}</small>
                     </div>
-                    <div class="card-body">{{ content.body }}</div>
+                    <div class="card-body">{{ content.body }}
+                    <!--Inline licensing {{ licensing[content.meta.license] }}--></div>
                     <div class="card-body">
                       <div class="content-licensing">
                         <ul class="list-inline">

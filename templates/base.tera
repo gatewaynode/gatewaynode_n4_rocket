@@ -12,16 +12,13 @@
   <body data-layout="fluid" data-sidebar-behavior="sticky" data-sidebar-position="left" data-theme="default">
     <div class="wrapper">
       <nav class="sidebar" id="sidebar">
-        <div class="sidebar-content js-simplebar">
+        <div class="sidebar-content js-simplebar" data-simplebar="init">
           <a class="sidebar-brand" href="/" title="Home">
             <img src="/static/images/nodes.svg" height=50px, width=50px>
             <span class="align-middle me-3">GatewayNode</span>
           </a>
           <ul class="sidebar-nav">
             <h3>Nodes</h3>
-            {# <li class="sidebar-header">
-              Nodes
-            </li> #}
             {% for key, value in main_menu %}
               <li class="sidebar-item">
                 <a
@@ -37,7 +34,7 @@
       </ul>
       <div class="sidebar-cta">
         <div class="sidebar-cta-content">
-          <strong class="d-inline-block mb-2">Source Code</strong>
+          <strong class="d-inline-block mb-2">Components</strong>
           <div class="mb-3 text-sm">
             Most of this site is built with open source components, some of these are my own projects.  You can check them out here.
             <!-- If you are reading this then you should understand this is probably future state. But feel free to check out my repos. -->
@@ -45,7 +42,7 @@
           <div class="d-grid">
             <a class="btn btn-github" href="https://github.com/gatewaynode?tab=repositories" target="_blank">
             <i class="align-left fab fa-github"></i>
-            Download</a>
+            Source Code</a>
           </div>
         </div>
       </div>

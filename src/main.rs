@@ -26,6 +26,13 @@ struct BasicPage {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+struct CompositePage {
+    main_menu: HashMap<String, MenuItem>,
+    content: n4::PageContent,
+    licensing: HashMap<String, String>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 struct ContentList {
     main_menu: HashMap<String, MenuItem>,
     content: Vec<n4::PageContent>,
@@ -96,7 +103,7 @@ fn main() {
     rocket::ignite()
         .manage(menus)
         .attach(Template::fairing())
-        .mount("/", routes![sitemap, robots, index, articles])
+        .mount("/", routes![sitemap, robots, index, articles, testing])
         .mount(
             "/static",
             StaticFiles::from(concat!(env!("CARGO_MANIFEST_DIR"), "/static")).rank(2),
@@ -135,15 +142,32 @@ fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
     let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
     let full_content = n4::read_single_page(Path::new(&format!(
         "{}/{}",
-        md_files_path, "blog/Webpack build caching errors....md"
+        md_files_path, "Introduction.md"
     )));
-    let context = BasicPage {
+    let context = CompositePage {
         main_menu: menus.clone(),
-        content: full_content.markdown,
+        content: full_content,
         licensing: cc_licensing(),
     };
 
     Template::render("index", context)
+}
+
+/// Front Page Route
+#[get("/testing")]
+fn testing(menus: State<HashMap<String, MenuItem>>) -> Template {
+    let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
+    let full_content = n4::read_single_page(Path::new(&format!(
+        "{}/{}",
+        md_files_path, "Introduction.md"
+    )));
+    let context = CompositePage {
+        main_menu: menus.clone(),
+        content: full_content,
+        licensing: cc_licensing(),
+    };
+
+    Template::render("testing", context)
 }
 
 /// Everything Else Route
