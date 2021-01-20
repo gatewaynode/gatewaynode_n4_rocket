@@ -12,7 +12,7 @@
   <body data-layout="fluid" data-sidebar-behavior="sticky" data-sidebar-position="left" data-theme="default">
     <div class="wrapper">
       <nav class="sidebar" id="sidebar">
-        <div class="sidebar-content js-simplebar" data-simplebar="init">
+        <div class="sidebar-content js-simplebar">{# data-simplebar="init" #}
           <a class="sidebar-brand" href="/" title="Home">
             <img src="/static/images/nodes.svg" height=50px, width=50px>
             <span class="align-middle me-3">GatewayNode</span>

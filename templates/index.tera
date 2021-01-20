@@ -1,6 +1,6 @@
 {% extends "base" %}
 {% block content %}
-  <div class="container-fluid p-0">
+  <div class="container-fluid p-0 {{ content.markdown.meta.content_type }} {{ content.markdown.meta.content_class }}">
     <div class="row">
       <div class="col-12 col-lg-12">
         <div class="card">
