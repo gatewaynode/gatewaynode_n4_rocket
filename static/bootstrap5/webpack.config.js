@@ -99,7 +99,7 @@ module.exports = {
       },
       // Load fonts
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, // Removing svg, let's hope I don't need SVG for fonts
         use: [
           {
             loader: "file-loader",

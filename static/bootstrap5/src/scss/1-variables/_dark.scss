@@ -90,6 +90,7 @@ $s2bs-input-single-color: #fff;
 //   color: lighten($alt-white, 30%);
 // }
 // // End mods
+$alt-white: #c5ccce !default;
 
 .main .card p a,
 tbody tr td a {
@@ -142,6 +143,20 @@ body code {
   background-color: #000000;
 }
 
+.card-body h3 a {
+  color: $alt-white;
+}
 .card-body ul a {
   color: $yellow;
+}
+
+li p {
+  margin-bottom: 0em;
+}
+
+.sidebar-nav .first-child {
+  font-weight: 300;
+}
+.sidebar-nav .first-child .badge-sidebar-secondary {
+  color: #1F1F1F;
 }

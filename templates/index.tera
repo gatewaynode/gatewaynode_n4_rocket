@@ -26,7 +26,7 @@
               <div class="col-12">
                 <div class="flex-grow-1">
                   <small class="float-end">{{ page.markdown.created }}</small>
-                    <h3><img class="me-3 icons" height="56" src="{{ page.markdown.meta.content_icon }}" width="56"/>{{ page.markdown.title }}</h3>
+                    <h3><img class="me-3 icons" height="56" src="{{ page.markdown.meta.content_icon }}" width="56"/><a href="{{ page.markdown.path }}" alt="Link to page">{{ page.markdown.title }}</a></h3>
                     {{ page.markdown.body }}
                   <small class="text-muted">{{ page.markdown.body | wordcount }} words</small><br/>
                   <a class="btn btn-sm btn-secondary mt-1" href="{{ page.markdown.path }}#commento" title="Add comments or ratings to content.">

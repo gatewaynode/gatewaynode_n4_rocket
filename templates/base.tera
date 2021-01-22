@@ -8,13 +8,23 @@
     <meta content="Gatewaynode" name="author"/>
     <title>GatewayNode</title>
     <link href="/static/bootstrap5/dist/css/dark.css" rel="stylesheet"/>
+    {# Placing the body background image here cause webpack sucks the SVG into fonts, yay! #}
+    <style>
+      body {
+      background-image: url("/static/images/main-background.svg");
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: 80%;
+    }
+    </style>
   </head>
   <body data-layout="fluid" data-sidebar-behavior="sticky" data-sidebar-position="left" data-theme="default">
     <div class="wrapper">
       <nav class="sidebar" id="sidebar">
         <div class="sidebar-content js-simplebar">{# data-simplebar="init" #}
           <a class="sidebar-brand" href="/" title="Home">
-            <img src="/static/images/nodes.svg" height=50px, width=50px>
+            {# <img src="/static/images/nodes.svg" height=50px, width=50px> #}
+            <img src="/static/images/logo-idea.svg" width=75px>
             <span class="align-middle me-3">GatewayNode</span>
           </a>
           <ul class="sidebar-nav">
@@ -28,6 +38,20 @@
                   <span class="badge badge-sidebar-primary" title="Number of items">{{ value.number_of_files }}</span>
                 </a>
               </li>
+              {% if value.children %}
+                {% for k, v in value.children %}
+                  <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show first-child" data-bs-parent="#sidebar">
+                    <li class="sidebar-item second-level">
+                      <a
+                        class="sidebar-link collapsed" href="{{ v.relative_path }}">
+                        <img src="{{ v.menu_meta.menu_icon }}" class="align-middle icons" title="{{ v.menu_meta.description }}">
+                        <span class="align-middle" title="{{ v.menu_meta.description }}">{{ k | title }}</span>
+                        <span class="badge badge-sidebar-secondary" title="Number of items">{{ v.number_of_files }}</span>
+                      </a>
+                    </li>
+                  </ul>
+                {% endfor %}
+              {% endif %}
             {% endfor %}
           </ul>
         </li>
