@@ -160,3 +160,15 @@ li p {
 .sidebar-nav .first-child .badge-sidebar-secondary {
   color: #1F1F1F;
 }
+
+.card blockquote {
+  background-color: darken($dark-theme-base, 10);
+  color: darken($alt-white, 17);
+  margin-left: 0.5em;
+}
+
+.card blockquote p {
+  border-left: 6px solid darken($alt-white, 40);
+  margin-left: 0.5em;
+  padding-left: 1em;
+}

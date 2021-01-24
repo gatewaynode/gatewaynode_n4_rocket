@@ -2,7 +2,12 @@
 {% block content %}
         <div class="container-fluid p-0">
           <a href="/{{ current_path }}">
+          {% if main_menu[current_path].menu_meta.menu_icon %}
             <h2 class="h2 mb-3"><img src={{ main_menu[current_path].menu_meta.menu_icon }} class="icons">{{ current_path }}</h2>
+          {% else %}
+          {# TODO Seems I need another way to get this icon as anything below level 1 fails #}
+            <h2 class="h2 mb-3"><img src="/static/images/folder.svg" class="icons">{{ current_path }}</h2>
+          {% endif %}
           </a>
 
           <div class="col-12">

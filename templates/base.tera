@@ -4,10 +4,11 @@
     <meta charset="utf-8"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <link rel="icon" href="/favicon.ico" />
     <meta content="Gatewaynode a personal site" name="description"/>
     <meta content="Gatewaynode" name="author"/>
     <title>GatewayNode</title>
-    <link href="/static/bootstrap5/dist/css/dark.css" rel="stylesheet"/>
+    <link href="/static/css/dark.css" rel="stylesheet"/>
     {# Placing the body background image here cause webpack sucks the SVG into fonts, yay! #}
     <style>
       body {
@@ -82,9 +83,9 @@
       <ul class="navbar-nav navbar-align" ></ul>
     </div>
   </nav>
-
+  <!-- Content withing this main tag may be licensed differently than the rest of the website.  Please check the licensing listed at/near the bottom of the main content section or assume full US copyright with all rights reserved -->
   <main class="content">{% block content %}{% endblock content %}</main>
-
+  <!-- End any different content licensing scope and assume full US copyright with full rights reserved. -->
   <footer class="footer">
     <div class="container-fluid">
       <div class="row text-muted">
@@ -117,7 +118,7 @@
   </footer>
 </div>
 </div>
-<script src="/static/bootstrap5/dist/js/app.js"></script>
+<script src="/static/javascript/app.js"></script>
 {#    
     <!-- Debugging Block -->
     <p style="

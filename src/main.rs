@@ -3,10 +3,10 @@
 extern crate rocket_contrib;
 
 use std::collections::HashMap;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use n4;
-use n4::{MDContent, MenuItem};
+use n4::{MDContent, MenuItem, PageContent};
 use rocket::response::Redirect;
 use rocket::State;
 use rocket_contrib::serve::StaticFiles;
@@ -18,6 +18,7 @@ extern crate rocket;
 #[macro_use]
 extern crate serde_derive;
 
+// TODO This and composite page are almost identical consolidate
 #[derive(Serialize, Deserialize, Debug)]
 struct BasicPage {
     main_menu: HashMap<String, MenuItem>,
@@ -25,10 +26,11 @@ struct BasicPage {
     licensing: HashMap<String, String>,
 }
 
+// TODO Consolidate with basic page
 #[derive(Serialize, Deserialize, Debug)]
 struct CompositePage {
     main_menu: HashMap<String, MenuItem>,
-    content: n4::PageContent,
+    content: PageContent,
     licensing: HashMap<String, String>,
 }
 
@@ -39,6 +41,7 @@ struct ContentList {
     current_path: String,
 }
 
+// TODO This probably belongs in a plugin
 fn cc_licensing() -> HashMap<String, String> {
     let list_opener = "<li class=\"list-inline-item\"><a rel=\"license\" href=\"https://creativecommons.org/licenses/";
     let scope_string = "/4.0/\" title=\"The content of this section (inside the 'main' tag), excepting the comments, is licensed under a Creative Commons ";
@@ -122,12 +125,7 @@ fn sitemap() -> Template {
 
 #[get("/robots.txt")]
 fn robots() -> String {
-    String::from(
-        "User-agents: *
-Allow: *
-
-Sitemap: https://gatewaynode.com/sitemap.xml",
-    )
+    n4::generate_robot_food()
 }
 
 #[get("/favicon.ico")]
@@ -139,11 +137,7 @@ fn favicon() -> Redirect {
 /// Front Page Route
 #[get("/")]
 fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
-    let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
-    let full_content = n4::read_single_page(Path::new(&format!(
-        "{}/{}",
-        md_files_path, "Introduction.md"
-    )));
+    let full_content = n4::read_single_page(String::from("Introduction.md"));
     let context = CompositePage {
         main_menu: menus.clone(),
         content: full_content,
@@ -153,14 +147,10 @@ fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
     Template::render("index", context)
 }
 
-/// Front Page Route
+/// For testing new templates
 #[get("/testing")]
 fn testing(menus: State<HashMap<String, MenuItem>>) -> Template {
-    let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website"; //TODO add to config management
-    let full_content = n4::read_single_page(Path::new(&format!(
-        "{}/{}",
-        md_files_path, "Introduction.md"
-    )));
+    let full_content = n4::read_single_page(String::from("Introduction.md"));
     let context = CompositePage {
         main_menu: menus.clone(),
         content: full_content,
@@ -171,38 +161,26 @@ fn testing(menus: State<HashMap<String, MenuItem>>) -> Template {
 }
 
 /// Everything Else Route
+///
+/// This should generally be a pretty late ranking function so other functions can easily override
 #[get("/<article..>", rank = 5)]
 fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Template {
     let mut content = MDContent::default();
-
-    let md_files_path: &str = "/home/anon/Documents/gatewaynode_notes/website";
-    // If Markdown file exists
-    if Path::new(&format!(
-        "{}/{}{}",
-        md_files_path,
-        article.to_string_lossy(),
-        ".md"
-    ))
-    .exists()
-    {
-        let full_content = n4::read_single_page(Path::new(&format!(
-            "{}/{}{}",
-            md_files_path,
-            article.to_string_lossy(),
-            ".md"
-        )));
+    // First check if a matching content file exists
+    if n4::does_content_exist(article.to_string_lossy().to_string()) {
+        let full_content = n4::read_single_page(format!("{}{}", article.to_string_lossy(), ".md"));
+        // TODO Need to pull in active path menu_meta files based on path
         let context = BasicPage {
             main_menu: menus.clone(),
-            content: full_content.markdown,
+            content: full_content.markdown, // TODO change with page type consolidation
             licensing: cc_licensing(),
         };
         return Template::render("article", context);
     }
-    // If Directory exists
-    else if Path::new(&format!("{}/{}", md_files_path, article.to_string_lossy())).is_dir() {
-        let content = n4::read_full_dir_sorted(
-            format!("{}/{}", md_files_path, article.to_string_lossy()).as_str(),
-        );
+    // Next check if a matching content directory exists
+    else if n4::does_directory_exist(article.to_string_lossy().to_string()) {
+        let content = n4::read_full_dir_sorted(article.to_string_lossy().to_string());
+        // TODO Need to pull in active path menu_meta files based on path
         let context = ContentList {
             main_menu: menus.clone(),
             content: content,
@@ -210,16 +188,16 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
         };
         return Template::render("directory", context);
     }
-    // Not found
+    // Last consider the path not found
     else {
         content.title = String::from("Not Found");
-        content.body = format!("This is the file router fail: {:#?}", article); // TODO send to 404 function
+        content.body = format!("This is the file router fail: {:#?}", article); // TODO send to 404 handler
+                                                                                // Compose the data to pass to the template
+        let context = BasicPage {
+            main_menu: menus.clone(),
+            content: content,
+            licensing: cc_licensing(),
+        };
+        return Template::render("article", context);
     }
-
-    let context = BasicPage {
-        main_menu: menus.clone(),
-        content: content,
-        licensing: cc_licensing(),
-    };
-    Template::render("article", context)
 }
