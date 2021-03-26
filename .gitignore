@@ -3,3 +3,8 @@
 .env
 .vscode
 .vscode/*
+static/bootstrap5/node_modules
+static/bootstrap5/node_modules/*
+static/bootstrap5/archive
+static/bootstrap5/archive/*
+

@@ -4,7 +4,7 @@
     <url>
       <loc>{{ entry.location }}.html</loc>
       <lastmod>"{{ entry.lastmod | truncate(length=19, end='') }}-04:00"</lastmod>
-      <changefreq>monthly</changefreq>
+      <changefreq>weekly</changefreq>
       <priority>{{ entry.priority }}</priority>
     </url>
   {% endfor %}

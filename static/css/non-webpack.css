@@ -1,0 +1,6 @@
+body {
+      background-image: url("/static/images/main-background.svg");
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: 80%;
+}

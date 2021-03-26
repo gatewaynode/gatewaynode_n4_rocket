@@ -172,3 +172,12 @@ li p {
   margin-left: 0.5em;
   padding-left: 1em;
 }
+
+.timestamp {
+  color: darken($alt-white, 40);
+  line-height: 1;
+}
+
+table.timestamp {
+  margin-bottom: 0em;
+}

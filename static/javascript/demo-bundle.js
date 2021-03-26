@@ -1,0 +1,1 @@
+../svelte-demo/public/build/bundle.js

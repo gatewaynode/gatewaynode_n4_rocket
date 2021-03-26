@@ -8,6 +8,7 @@ const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const hljs = require("highlight.js");
+const tsParticles = require("tsparticles");
 
 const opts = {
   rootDir: process.cwd(),
@@ -18,9 +19,11 @@ module.exports = {
   entry: {
     app: "./src/js/app.js",
     code: "./src/js/code.js",
+    tsparticles: "./src/js/tsparticles.js",
     settings: "./src/js/settings/index.js",
     light: "./src/scss/light.scss",
     dark: "./src/scss/dark.scss",
+    fancy: "./src/scss/fancy.scss",
   },
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
   devtool:

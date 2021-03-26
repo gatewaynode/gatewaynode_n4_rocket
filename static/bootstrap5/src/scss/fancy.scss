@@ -1,0 +1,217 @@
+// Settings
+// 3d or 2d?
+$planar-3d: false !default;
+
+// set the dimensions of yr grid
+$planar-x: 12;
+$planar-y: 10;
+//$planar-z: 2;
+
+$point-size: 15px;
+$spacing: 0;
+
+@function rando-shuffle($list) {
+  $list-length: length($list);
+
+  @while($list-length > 0) {
+    $rand: random($list-length);
+    $temp: nth($list, $rand);
+    $list: set-nth($list, $rand, nth($list, $list-length));
+    $list: set-nth($list, $list-length, $temp);
+    $list-length: $list-length - 1;
+  }
+
+  @return $list;
+}
+
+// Make the grid outta maps and maps and maps
+@function make-grid($x-max, $y-max, $z-max: null) {
+  $grid: ();
+  @for $i from 1 through $x-max {
+    $row: ();
+
+    @if $planar-3d == false {
+      @for $j from 1 through $y-max {
+        $row: map-merge($row, ($j: false));
+      } 
+    }
+    @else if $planar-3d == true {
+      @for $j from 1 through $y-max {
+        $line: ();
+        @for $k from 1 through $z-max {
+          $line: map-merge($line, ($k: false));
+        }
+        $row: map-merge($row, ($j: $line));
+      }
+    }
+    $grid: map-merge($grid, ($i: $row));
+  }
+  @return $grid;
+}
+
+// Set the value of a grid point based on its coords
+@function set-grid($grid, $val, $x, $y, $z: null) {
+  @if ($planar-3d == false) {
+    // get the x-map, merge the new y-map into it
+    $row: map-merge(map-get($grid, $x), ($y: $val));
+    // merge the new x-map into the grid
+    @return map-merge($grid, ($x: $row));
+  }
+  @else if ($planar-3d == true) {
+    // get the x-val map, and the y-val map from that
+    $row: map-get($grid, $x);
+    // and then the y-val map from that
+    $line: map-get($row, $y);
+    // merge in the new z-map into the y-map
+    $line: map-merge($line, ($z: $val));
+    // merge in the new y-map into the x-map
+    $row: map-merge($row, ($y: $line));
+    // merge the new x-map into the grid
+    $grid: map-merge($grid, ($x: $row));
+    @return $grid;
+  }
+}
+
+// Get the value of a grid point
+@function get-value($grid, $x, $y, $z: null) {
+  @if ($planar-3d == true) {
+    @return map-get(map-get(map-get($grid, $x), $y), $z);
+  }
+  @else if ($planar-3d == false) {
+    @return map-get(map-get($grid, $x), $y);
+  }
+}
+
+@function get-deep-value($grid, $val, $x, $y, $z: null) {
+  @return map-get(get-value($grid, $x, $y, $z), $val);
+}
+
+@function bulk-set($grid, $val) {
+  $grid: $grid;
+  @for $i from 1 through $planar-x {
+    @for $j from 1 through $planar-y {
+      @if $planar-3d == false {
+        $grid: set-grid($grid, $val, $i, $j);
+      }
+      @else if $planar-3d == true {
+        @for $k from 1 through $planar-z {
+          $grid: set-grid($grid, $val, $i, $j, $k);
+        }
+      }
+    }
+  }
+  @return $grid;
+}
+
+@function bulk-get($grid) {
+  $vals: ();
+  @for $i from 1 through $planar-x {
+    @for $j from 1 through $planar-y {
+      @if ($planar-3d == false) {
+        $vals: join($vals, map-values(map-get(map-get($grid, $i), $j)));
+      }
+      @else if ($planar-3d == true) {
+        @for $k from 1 through $planar-z {
+          $vals: join($vals, map-get(map-get(map-get($grid, $i), $j), $k));
+        }
+      }
+    }
+  }
+  @return $vals;
+}
+
+@mixin print-2d($grid) {
+  @at-root {
+    // html, body { 
+    //   min-height: 100%;
+    // }
+    #{$grid-container} {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: (($point-size + $spacing) * $planar-x) - $spacing;
+      height: (($point-size + $spacing) * $planar-y) - $spacing;
+      > * {
+        width: $point-size;
+        height: $point-size;
+        position: absolute;
+        top: 0;
+        left: 0;
+        $count: 1;
+        $ordered-list: ();
+
+        @for $x from 1 through $planar-x {
+          @for $y from 1 through $planar-y {
+            $grid: set-grid($grid, (x: ($x - 1) * ($spacing + $point-size), 
+                                    y: ($y - 1) * ($spacing + $point-size)),
+                                    $x, $y);
+            $ordered-list: append($ordered-list, ($x, $y));
+          }
+        }    
+
+        $shuffled-list: rando-shuffle($ordered-list);
+        $shuffled-list-two: rando-shuffle($ordered-list);
+
+        @for $i from 1 through length($ordered-list) {
+          $this-x: nth(nth($ordered-list, $i), 1);
+          $this-y: nth(nth($ordered-list, $i), 2);
+          $rand-x: nth(nth($shuffled-list, $i), 1);
+          $rand-y: nth(nth($shuffled-list, $i), 2);
+          $altrand-x: nth(nth($shuffled-list-two, $i), 1);
+          $altrand-y: nth(nth($shuffled-list-two, $i), 2);
+          &:nth-child(#{$i}) {
+            transform: translate(get-deep-value($grid, x, $this-x, $this-y), 
+                               get-deep-value($grid, y, $this-x, $this-y));
+            animation: shunt-#{$i} 8s ease infinite alternate;
+            $red: ($this-x * 10) + 30;
+            $blue: ($this-y * 10) + 30;
+            background: rgba($red, 10, $blue, 1);
+            box-shadow: 3px 3px rgba($red, 10, $blue, .5);
+            @keyframes shunt-#{$i} {
+              0%, 10% {
+                transform: translate(get-deep-value($grid, x, $this-x, $this-y), 
+                                     get-deep-value($grid, y, $altrand-x, $altrand-y));
+              }
+              30%, 40% {
+                transform: translate(get-deep-value($grid, x, $rand-x, $rand-y), 
+                                     get-deep-value($grid, y, $this-x, $this-y));
+              }
+              70%, 80% {
+                transform: translate(get-deep-value($grid, x, $this-x, $this-y), 
+                                     get-deep-value($grid, y, $rand-x, $rand-y));
+              }
+              95%, 100% {
+                transform: translate(get-deep-value($grid, x, $altrand-x, $altrand-y), 
+                                     get-deep-value($grid, y, $this-x, $this-y));
+              }
+            }
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+@mixin iterate($list) {
+  @at-root {
+    #{$grid-container} {
+      @for $i from 1 through length($list) {
+        > *:nth-child(#{$i}) {
+          @content;
+        }
+      }  
+    }
+  }
+}
+
+$grid: make-grid($planar-x, $planar-y);
+$grid-container: '.wrap';
+
+body div.fancy {
+  @include print-2d($grid);
+  background: #111;
+}

@@ -1,0 +1,39 @@
+{% extends "base" %}
+{% block content %}
+        <div class="container-fluid p-0">
+          <a href={{ content.meta.path | replace(from=content.meta.title, to="") }}>
+            <h2 class="h2 mb-3"><img src="{{ content.meta.content_icon }}" class="icons">{{ content.meta.path | replace(from=content.meta.title, to="") }}</h2> {# TODO Section Meta header goes here #}
+          </a>
+          
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                    {# What is the class .card-title even useful for? #}
+                      <h3 class=" mb-0">{{ content.meta.title }}</h3>
+                      <small class="timestamp" alt="Creation time">{{ content.markdown.created }}</small>
+                    </div>
+                    <div class="card-body">{{ content.markdown.body }}
+                      <!--Inline licensing {{ licensing[content.meta.license] }}-->
+                    </div>
+                    <div class="card-body">
+                      <div class="content-licensing">
+                        <ul class="list-inline">
+                          {{ licensing[content.meta.license] }}
+                          <li class="list-inline-item">
+                            <small>Author: {{ content.meta.author }} </small>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    {# <div class="card-body">
+                      <script defer src="https://cdn.commento.io/js/commento.js"></script>
+                      <div id="commento"></div>
+                    </div> #}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {# Cause we are going to be posting a lot of code right? #}
+          <script src="/static/bootstrap5/dist/js/code.js"></script>
+{% endblock content %}

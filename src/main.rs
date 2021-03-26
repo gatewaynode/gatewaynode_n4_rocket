@@ -37,7 +37,7 @@ struct CompositePage {
 #[derive(Serialize, Deserialize, Debug)]
 struct ContentList {
     main_menu: HashMap<String, MenuItem>,
-    content: Vec<n4::PageContent>,
+    content: Vec<n4::ContentMeta>,
     current_path: String,
 }
 
@@ -46,8 +46,8 @@ fn cc_licensing() -> HashMap<String, String> {
     let list_opener = "<li class=\"list-inline-item\"><a rel=\"license\" href=\"https://creativecommons.org/licenses/";
     let scope_string = "/4.0/\" title=\"The content of this section (inside the 'main' tag), excepting the comments, is licensed under a Creative Commons ";
     let middle_first = "4.0 International License(https://creativecommons.org/licenses/";
-    let middle_second = "/4.0/).  Content in comments (inside the 'commento' id) is subject to the commento.io licensing terms. All other content on the page is subject to US copyright as listed at the bottom of the page\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/";
-    let list_closer = "/4.0/80x15.png\" /></a></li>";
+    let middle_second = "/4.0/).  Content in comments (inside the 'commento' id) is subject to the commento.io licensing terms. All other content on the page is subject to US copyright as listed at the bottom of the page\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"/static/images/licensing/cc-";
+    let list_closer = "_80x15.png\" /></a></li>";
     let mut licenses: HashMap<String, String> = HashMap::new();
     licenses.insert(
         String::from("cc-by"),
@@ -137,7 +137,7 @@ fn favicon() -> Redirect {
 /// Front Page Route
 #[get("/")]
 fn index(menus: State<HashMap<String, MenuItem>>) -> Template {
-    let full_content = n4::read_single_page(String::from("Introduction.md"));
+    let full_content = n4::read_single_page(String::from("Introduction"));
     let context = CompositePage {
         main_menu: menus.clone(),
         content: full_content,
@@ -165,17 +165,24 @@ fn testing(menus: State<HashMap<String, MenuItem>>) -> Template {
 /// This should generally be a pretty late ranking function so other functions can easily override
 #[get("/<article..>", rank = 5)]
 fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Template {
-    let mut content = MDContent::default();
+    let mut content = PageContent::default();
     // First check if a matching content file exists
     if n4::does_content_exist(article.to_string_lossy().to_string()) {
-        let full_content = n4::read_single_page(format!("{}{}", article.to_string_lossy(), ".md"));
+        let full_content = n4::read_single_page(article.to_string_lossy().to_string());
         // TODO Need to pull in active path menu_meta files based on path
-        let context = BasicPage {
+        let context = CompositePage {
             main_menu: menus.clone(),
-            content: full_content.markdown, // TODO change with page type consolidation
+            content: full_content, // TODO change with page type consolidation
             licensing: cc_licensing(),
         };
-        return Template::render("article", context);
+        let mut render_template: String;
+        if context.content.meta.template_override == "" {
+            render_template = "article".to_string();
+        } else {
+            render_template = context.content.meta.template_override.clone();
+        }
+        // dbg!(&context);
+        return Template::render(render_template, context);
     }
     // Next check if a matching content directory exists
     else if n4::does_directory_exist(article.to_string_lossy().to_string()) {
@@ -190,10 +197,10 @@ fn articles(article: PathBuf, menus: State<HashMap<String, MenuItem>>) -> Templa
     }
     // Last consider the path not found
     else {
-        content.title = String::from("Not Found");
-        content.body = format!("This is the file router fail: {:#?}", article); // TODO send to 404 handler
-                                                                                // Compose the data to pass to the template
-        let context = BasicPage {
+        content.meta.title = String::from("Not Found");
+        content.markdown.body = format!("This is the file router fail: {:#?}", article); // TODO send to 404 handler
+                                                                                         // Compose the data to pass to the template
+        let context = CompositePage {
             main_menu: menus.clone(),
             content: content,
             licensing: cc_licensing(),
