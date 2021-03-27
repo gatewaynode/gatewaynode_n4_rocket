@@ -1,6 +1,7 @@
 /target
 /target/*
 .env
+Rocket.toml
 .vscode
 .vscode/*
 static/bootstrap5/node_modules
