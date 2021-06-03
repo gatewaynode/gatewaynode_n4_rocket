@@ -1,4 +1,4 @@
-{% extends "base" %}
+{% extends "base-testing" %}
 {% block content %}
   <div class="container-fluid p-0">
     <div class="row">
@@ -10,33 +10,14 @@
               {# Make sure you have a column div to stay responsive #}
               <div class="col-12">
                 <div class="flex-grow-1">
-                    <h3><img class="me-3 icons" height="56" src="{{ content.markdown.meta.content_icon }}" width="56"/>{{ content.markdown.title }}</h3>
-                    {{ content.markdown.body }}
+                    <h3>TITLE</h3>
+                    CONTENT?
                 </div>
               </div>
             </div>
           </div>
           {# Content List Begin #}
-          {% for page in content.markdown.list %}
-          <hr>
-          <div class="card-body h-100">
-          {# Sticky a top post #}
-            <div class="d-flex align-items-start sticky">
-              {# Make sure you have a column div to stay responsive #}
-              <div class="col-12">
-                <div class="flex-grow-1">
-                  <small class="float-end">{{ page.markdown.created }}</small>
-                    <h3><img class="me-3 icons" height="56" src="{{ page.markdown.meta.content_icon }}" width="56"/>{{ page.markdown.title }}</h3>
-                    {{ page.markdown.body }}
-                  <small class="text-muted">{{ page.markdown.body | wordcount }} words</small><br/>
-                  <a class="btn btn-sm btn-secondary mt-1" href="{{ page.markdown.path }}#commento" title="Add comments or ratings to content.">
-                    <img src="/static/images/globe.svg" class="icons">
-                    Comment or Rate</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor%}
+          HERE BE TESTING
         </div>
       </div> <!-- End Cards -->
         
